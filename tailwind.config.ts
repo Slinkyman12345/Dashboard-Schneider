@@ -66,12 +66,15 @@ export default {
 				// Military theme colors
 				military: {
 					dark: '#1a1f1c',
+					darkblue: '#111820',
 					khaki: '#78866b',
 					green: '#4a5c42',
 					red: '#a83232',
 					orange: '#cc7832',
 					gray: '#3c3c3c',
 					lightgray: '#606060',
+					gold: '#d4af37',
+					lightgold: '#d4af3799',
 				}
 			},
 			fontFamily: {
@@ -119,8 +122,20 @@ export default {
 				},
 				'blink': {
 					'0%, 100%': { borderColor: 'transparent' },
-					'50%': { borderColor: '#fff' }
-				}
+					'50%': { borderColor: '#d4af37' }
+				},
+				'security-banner': {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(-50%)' }
+				},
+				'progress-bar': {
+					'0%': { width: '0%' },
+					'100%': { width: '100%' }
+				},
+				'progress-line': {
+					'0%': { transform: 'translateX(-100%)' },
+					'100%': { transform: 'translateX(100%)' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -131,7 +146,10 @@ export default {
 				'rotate-logo': 'rotate-logo 4s linear infinite',
 				'fade-in': 'fade-in 0.5s ease-in forwards',
 				'typing': 'typing 3.5s steps(40, end)',
-				'blink': 'blink 1s step-end infinite'
+				'blink': 'blink 1s step-end infinite',
+				'security-banner': 'security-banner 30s linear infinite',
+				'progress-bar': 'progress-bar 5s linear',
+				'progress-line': 'progress-line 1s infinite',
 			}
 		}
 	},

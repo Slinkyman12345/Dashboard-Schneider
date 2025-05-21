@@ -38,18 +38,16 @@ const SidebarMenu = ({ activeTab, onTabChange }: SidebarMenuProps) => {
   return (
     <div className="p-4">
       <div className="flex justify-center mb-8">
-        <img 
-          src="/placeholder.svg" 
-          alt="Logo Armée de Terre" 
-          className="w-16 h-16"
-        />
+        <div className="w-16 h-16 rounded-full border-2 border-military-gold flex items-center justify-center">
+          <div className="military-emblem text-military-gold">★</div>
+        </div>
       </div>
       
       <div className="mb-6 text-center">
-        <h2 className="military-header text-sm mb-1">DOSSIER PERSONNEL</h2>
-        <p className="text-xl text-military-orange font-military">A. SCHNEIDER</p>
-        <div className="mt-2 text-xs bg-military-red/20 p-1 text-red-400">
-          NIVEAU CONFIDENTIALITÉ: ÉLEVÉ
+        <h2 className="military-header text-sm mb-1 text-military-lightgold">DOSSIER PERSONNEL</h2>
+        <p className="text-xl text-military-gold font-military">A. SCHNEIDER</p>
+        <div className="mt-2 text-xs bg-red-900/20 p-1 text-red-400 border border-red-900/50">
+          NIVEAU CONFIDENTIEL: ÉLEVÉ
         </div>
       </div>
       
@@ -57,8 +55,8 @@ const SidebarMenu = ({ activeTab, onTabChange }: SidebarMenuProps) => {
         {menuItems.map((item) => (
           <button
             key={item.id}
-            className={`w-full flex items-center p-2 text-left hover:bg-military-green/20 transition-colors ${
-              activeTab === item.id ? "bg-military-green/30 border-l-2 border-military-orange" : ""
+            className={`w-full flex items-center p-2 text-left hover:bg-military-gold/20 transition-colors text-military-gold ${
+              activeTab === item.id ? "bg-military-gold/30 border-l-2 border-military-gold" : ""
             }`}
             onClick={() => handleClick(item.id)}
           >
@@ -68,8 +66,8 @@ const SidebarMenu = ({ activeTab, onTabChange }: SidebarMenuProps) => {
         ))}
       </div>
       
-      <div className="mt-12 text-xs text-military-lightgray">
-        <div className="border-t border-military-green pt-4 space-y-2">
+      <div className="mt-12 text-xs text-military-lightgold">
+        <div className="border-t border-military-gold pt-4 space-y-2">
           <div className="flex justify-between">
             <span>Terminal ID:</span>
             <span>TERM-74392</span>
