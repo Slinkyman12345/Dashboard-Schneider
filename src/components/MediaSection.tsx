@@ -1,12 +1,16 @@
 
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/components/ui/use-toast";
 
 const MediaSection = () => {
   const [mediaTab, setMediaTab] = useState("photos");
+  const { toast } = useToast();
   
+  // Photos data
   const photos = [
     {
       id: "PHT-2016-001",
@@ -39,25 +43,10 @@ const MediaSection = () => {
       classification: "Diffusion limitée",
       description: "Schneider présentant du matériel de cryptographie tactique à de nouveaux opérateurs.",
       thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "PHT-2020-018",
-      title: "Exercice interarmées",
-      date: "19/06/2020",
-      classification: "Diffusion limitée",
-      description: "Schneider (à gauche) avec son équipe d'analystes lors de l'exercice combiné 'Unified Vision'.",
-      thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "PHT-2022-051",
-      title: "[Classifié]",
-      date: "??/??/2022",
-      classification: "Secret Défense",
-      description: "[ACCÈS RESTREINT]",
-      thumbnail: "/placeholder.svg"
     }
   ];
 
+  // Videos data
   const videos = [
     {
       id: "VID-2017-003",
@@ -76,36 +65,10 @@ const MediaSection = () => {
       classification: "Confidentiel",
       description: "Schneider présentant une analyse de menace cyber sur les réseaux militaires.",
       thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "VID-2019-112",
-      title: "Formation décryptage",
-      date: "03/12/2019",
-      duration: "45:07",
-      classification: "Confidentiel",
-      description: "Enregistrement de session de formation dispensée par Schneider sur les techniques d'analyse cryptographique.",
-      thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "VID-2021-043",
-      title: "Surveillance - Incident [CENSURÉ]",
-      date: "22/07/2021",
-      duration: "3:51",
-      classification: "Secret Défense",
-      description: "[CONTENU RESTREINT]",
-      thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "VID-2022-019",
-      title: "[Classifié]",
-      date: "??/??/2022",
-      duration: "??:??",
-      classification: "Très Secret Défense",
-      description: "[ACCÈS NON AUTORISÉ]",
-      thumbnail: "/placeholder.svg"
     }
   ];
 
+  // Audio data
   const audio = [
     {
       id: "AUD-2016-054",
@@ -124,27 +87,10 @@ const MediaSection = () => {
       classification: "Confidentiel",
       description: "Enregistrement de Schneider coordonnant une extraction d'urgence. Usage pédagogique autorisé.",
       thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "AUD-2020-012",
-      title: "Interrogatoire de source",
-      date: "09/11/2020",
-      duration: "38:25",
-      classification: "Secret Défense",
-      description: "[ACCÈS RESTREINT]",
-      thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "AUD-2022-007",
-      title: "Évaluation psychologique post-mission",
-      date: "30/01/2022",
-      duration: "22:18",
-      classification: "Confidentiel",
-      description: "Entretien avec le Dr. Pelletier après incident du [CENSURÉ]. Accès limité au personnel médical.",
-      thumbnail: "/placeholder.svg"
     }
   ];
 
+  // Documents data
   const documents = [
     {
       id: "DOC-2015-103",
@@ -163,33 +109,6 @@ const MediaSection = () => {
       classification: "Confidentiel",
       description: "Document rédigé par Schneider concernant l'amélioration des protocoles de communication cryptée en terrain hostile.",
       thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "DOC-2018-214",
-      title: "Traduction et analyse",
-      date: "03/12/2018",
-      type: "PDF",
-      classification: "Secret Défense",
-      description: "Traduction et analyse linguistique de documents saisis lors de l'opération [CENSURÉ].",
-      thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "DOC-2020-062",
-      title: "Plan d'opération [CENSURÉ]",
-      date: "18/03/2020",
-      type: "PDF",
-      classification: "Très Secret Défense",
-      description: "[ACCÈS NON AUTORISÉ]",
-      thumbnail: "/placeholder.svg"
-    },
-    {
-      id: "DOC-2022-051",
-      title: "Évaluation de menace cybernétique",
-      date: "09/11/2022",
-      type: "PPTX",
-      classification: "Secret Défense",
-      description: "Présentation réalisée par Schneider sur les vulnérabilités potentielles des systèmes de commandement tactique.",
-      thumbnail: "/placeholder.svg"
     }
   ];
 
@@ -202,10 +121,26 @@ const MediaSection = () => {
     "Secret Défense": "bg-orange-900/30 text-orange-400 border-orange-900/50",
     "Très Secret Défense": "bg-red-900/30 text-red-400 border-red-900/50"
   };
+  
+  // Handler for media item click
+  const handleMediaClick = (item: any) => {
+    if (item.classification.includes("Secret")) {
+      toast({
+        title: "Accès refusé",
+        description: `Niveau d'accréditation insuffisant pour accéder à ce contenu ${item.classification}.`,
+        variant: "destructive"
+      });
+    } else {
+      toast({
+        title: "Fichier en cours de chargement",
+        description: `Ouverture du fichier ${item.id} - ${item.title}`,
+      });
+    }
+  };
 
   return (
     <div className="space-y-6">
-      <div className="military-frame">
+      <div className="military-frame animate-fade-in">
         <h2 className="military-header text-xl mb-4">DOSSIERS AUDIO/VISUELS :: SCHNEIDER, Alexander</h2>
         
         <Tabs value={mediaTab} onValueChange={setMediaTab} className="w-full">
@@ -228,7 +163,11 @@ const MediaSection = () => {
           <TabsContent value="photos" className="mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {photos.map((photo, index) => (
-                <div key={index} className="military-frame bg-military-dark/50 overflow-hidden">
+                <div 
+                  key={index} 
+                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer"
+                  onClick={() => handleMediaClick(photo)}
+                >
                   <div className="aspect-w-16 aspect-h-9 mb-3">
                     <AspectRatio ratio={4/3}>
                       <img 
@@ -238,7 +177,7 @@ const MediaSection = () => {
                       />
                     </AspectRatio>
                     {photo.classification.includes("Secret") && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/70 text-military-red font-bold">
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/70 text-military-red font-bold animate-pulse">
                         ACCÈS RESTREINT
                       </div>
                     )}
@@ -264,7 +203,11 @@ const MediaSection = () => {
           <TabsContent value="videos" className="mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {videos.map((video, index) => (
-                <div key={index} className="military-frame bg-military-dark/50 overflow-hidden">
+                <div 
+                  key={index} 
+                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer"
+                  onClick={() => handleMediaClick(video)}
+                >
                   <div className="aspect-w-16 aspect-h-9 relative mb-3">
                     <AspectRatio ratio={16/9}>
                       <img 
@@ -273,12 +216,12 @@ const MediaSection = () => {
                         className="w-full h-full object-cover border border-military-green"
                       />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-military-green/50 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full bg-military-green/50 flex items-center justify-center hover:bg-military-green/80 transition-colors">
                           <div className="w-0 h-0 border-y-8 border-y-transparent border-l-14 border-l-white ml-1"></div>
                         </div>
                       </div>
                       {video.classification.includes("Secret") && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/70 text-military-red font-bold">
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/70 text-military-red font-bold animate-pulse">
                           ACCÈS RESTREINT
                         </div>
                       )}
@@ -308,14 +251,18 @@ const MediaSection = () => {
           <TabsContent value="audio" className="mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {audio.map((item, index) => (
-                <div key={index} className="military-frame bg-military-dark/50 overflow-hidden">
+                <div 
+                  key={index} 
+                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer"
+                  onClick={() => handleMediaClick(item)}
+                >
                   <div className="p-3 flex items-center justify-center mb-2 border border-military-green">
-                    <div className="w-12 h-12 rounded-full bg-military-green/50 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-military-green/50 flex items-center justify-center hover:bg-military-green/80 transition-colors">
                       <div className="w-0 h-0 border-y-8 border-y-transparent border-l-14 border-l-white ml-1"></div>
                     </div>
-                    <div className="ml-4">
-                      <div className="w-32 h-4 bg-military-dark">
-                        <div className="h-full bg-military-orange" style={{ width: "65%" }}></div>
+                    <div className="ml-4 w-full">
+                      <div className="w-full h-4 bg-military-dark rounded overflow-hidden">
+                        <div className="h-full bg-military-orange rounded" style={{ width: "65%" }}></div>
                       </div>
                       <div className="text-xs text-military-lightgray mt-1">{item.duration}</div>
                     </div>
@@ -341,7 +288,11 @@ const MediaSection = () => {
           <TabsContent value="documents" className="mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {documents.map((doc, index) => (
-                <div key={index} className="military-frame bg-military-dark/50 overflow-hidden">
+                <div 
+                  key={index} 
+                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer"
+                  onClick={() => handleMediaClick(doc)}
+                >
                   <div className="p-3 flex items-center border border-military-green mb-3">
                     <div className="w-12 h-14 bg-military-dark/80 border border-military-lightgray flex items-center justify-center text-xs">
                       {doc.type}
