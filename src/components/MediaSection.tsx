@@ -5,6 +5,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
+import { Image } from "lucide-react";
 
 const MediaSection = () => {
   const [mediaTab, setMediaTab] = useState("photos");
@@ -14,35 +15,43 @@ const MediaSection = () => {
   const photos = [
     {
       id: "PHT-2016-001",
-      title: "Formation Jungle - Guyane",
+      title: "Entraînement en milieu réel",
       date: "04/03/2016",
       classification: "Non classifié",
-      description: "Schneider (centre) pendant le stage de survie en milieu tropical. Centre d'Entraînement à la Forêt Équatoriale.",
-      thumbnail: "/placeholder.svg"
+      description: "Schneider lors d'un exercice d'entraînement en conditions réelles.",
+      thumbnail: "/lovable-uploads/65c58973-56f4-4dfd-b78d-143bbed0e749.png"
     },
     {
       id: "PHT-2017-042",
-      title: "Exercice OTAN - Norway",
-      date: "17/11/2017",
-      classification: "Non classifié",
-      description: "Schneider préparant le matériel de transmission lors de l'exercice Cold Response en Norvège.",
-      thumbnail: "/placeholder.svg"
+      title: "Opération Pamir - Afghanistan",
+      date: "12/05/2010",
+      classification: "Partiellement déclassifié",
+      description: "Convoi militaire lors de l'Opération Pamir en Afghanistan où Schneider a établi un relais d'urgence.",
+      thumbnail: "/lovable-uploads/4b3d35e6-71b9-449b-9a8f-ae76355f7ef1.png"
     },
     {
       id: "PHT-2018-103",
-      title: "Capture - Identité militaire",
-      date: "22/05/2018",
-      classification: "Non classifié",
-      description: "Photo d'identité officielle, uniforme de service.",
-      thumbnail: "/placeholder.svg"
+      title: "Opération Barkhane - Mali",
+      date: "18/12/2015",
+      classification: "Diffusion limitée",
+      description: "Forces déployées lors de l'Opération Barkhane au Mali où Schneider a dirigé une équipe en mission de reconnaissance.",
+      thumbnail: "/lovable-uploads/48d3f843-76b4-4704-9c36-8fc6f3df80d9.png"
     },
     {
       id: "PHT-2019-074",
-      title: "Démonstration d'équipement",
-      date: "03/09/2019",
+      title: "Opération Lynx - Estonie",
+      date: "12/05/2018",
       classification: "Diffusion limitée",
-      description: "Schneider présentant du matériel de cryptographie tactique à de nouveaux opérateurs.",
-      thumbnail: "/placeholder.svg"
+      description: "Schneider et son équipe lors de l'opération Lynx en Estonie, contrant des cybermenaces.",
+      thumbnail: "/lovable-uploads/5fa33a01-1adf-473a-a3ec-d05b05841244.png"
+    },
+    {
+      id: "PHT-2020-015",
+      title: "Photo d'identité officielle",
+      date: "10/01/2020",
+      classification: "Non classifié",
+      description: "Photo d'identité officielle de Schneider Alexander pour les documents militaires.",
+      thumbnail: "/lovable-uploads/11002651-daf9-48f1-b1ae-2df34776289f.png"
     }
   ];
 
@@ -117,6 +126,7 @@ const MediaSection = () => {
     "Non classifié": "bg-green-900/30 text-green-500 border-green-900/50",
     "Diffusion limitée": "bg-blue-900/30 text-blue-400 border-blue-900/50",
     "Confidentiel": "bg-yellow-900/30 text-yellow-400 border-yellow-900/50",
+    "Partiellement déclassifié": "bg-blue-900/30 text-blue-400 border-blue-900/50",
     "Confidentiel Défense": "bg-yellow-900/30 text-yellow-400 border-yellow-900/50",
     "Secret Défense": "bg-orange-900/30 text-orange-400 border-orange-900/50",
     "Très Secret Défense": "bg-red-900/30 text-red-400 border-red-900/50"
@@ -165,15 +175,15 @@ const MediaSection = () => {
               {photos.map((photo, index) => (
                 <div 
                   key={index} 
-                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer"
+                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer transform hover:scale-[1.02] transition-all duration-300"
                   onClick={() => handleMediaClick(photo)}
                 >
-                  <div className="aspect-w-16 aspect-h-9 mb-3">
+                  <div className="aspect-w-16 aspect-h-9 mb-3 overflow-hidden">
                     <AspectRatio ratio={4/3}>
                       <img 
                         src={photo.thumbnail} 
                         alt={photo.title}
-                        className="w-full h-full object-cover border border-military-green"
+                        className="w-full h-full object-cover border border-military-green hover:opacity-90 transition-opacity"
                       />
                     </AspectRatio>
                     {photo.classification.includes("Secret") && (
@@ -205,16 +215,14 @@ const MediaSection = () => {
               {videos.map((video, index) => (
                 <div 
                   key={index} 
-                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer"
+                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer transform hover:scale-[1.02] transition-all duration-300"
                   onClick={() => handleMediaClick(video)}
                 >
                   <div className="aspect-w-16 aspect-h-9 relative mb-3">
                     <AspectRatio ratio={16/9}>
-                      <img 
-                        src={video.thumbnail}
-                        alt={video.title}
-                        className="w-full h-full object-cover border border-military-green"
-                      />
+                      <div className="w-full h-full border border-military-green bg-military-dark/80 flex items-center justify-center">
+                        <Image className="w-16 h-16 text-military-lightgray opacity-50" />
+                      </div>
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-16 h-16 rounded-full bg-military-green/50 flex items-center justify-center hover:bg-military-green/80 transition-colors">
                           <div className="w-0 h-0 border-y-8 border-y-transparent border-l-14 border-l-white ml-1"></div>
@@ -253,7 +261,7 @@ const MediaSection = () => {
               {audio.map((item, index) => (
                 <div 
                   key={index} 
-                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer"
+                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer transform hover:scale-[1.02] transition-all duration-300"
                   onClick={() => handleMediaClick(item)}
                 >
                   <div className="p-3 flex items-center justify-center mb-2 border border-military-green">
@@ -290,7 +298,7 @@ const MediaSection = () => {
               {documents.map((doc, index) => (
                 <div 
                   key={index} 
-                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer"
+                  className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer transform hover:scale-[1.02] transition-all duration-300"
                   onClick={() => handleMediaClick(doc)}
                 >
                   <div className="p-3 flex items-center border border-military-green mb-3">

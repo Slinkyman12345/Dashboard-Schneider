@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp, MapPin, Clock, Briefcase, Star, FileText, Target } from "lucide-react";
+import { ChevronDown, ChevronUp, MapPin, Clock, Briefcase, Star, FileText, Target, Users, Shield } from "lucide-react";
 import TerminalText from "@/components/TerminalText";
 import useSound from "@/hooks/useSound";
 
@@ -13,88 +13,49 @@ const OperationsSection = () => {
   
   const operations = [
     {
-      id: "OPEX-12-MAHQ",
-      name: "Opération Serval",
-      location: "Mali",
-      dates: "01/2013 - 04/2013",
-      role: "Opérateur transmissions",
-      grade: "Sergent",
-      status: "Terminée",
-      classification: "Déclassifié",
-      details: "Participation à la mise en place des systèmes de communications tactiques lors de l'intervention au Mali pour stopper la progression des groupes armés jihadistes. A assuré les liaisons chiffrées entre le poste de commandement avancé et l'état-major.",
-      results: "Décoré de la Croix de la valeur militaire avec étoile de bronze.",
-      objectives: ["Sécurisation zone nord", "Établissement réseau comm.", "Support aux unités d'assaut"],
-      unitSize: "14 personnels"
-    },
-    {
-      id: "OPEX-14-HAQD",
-      name: "Opération Barkhane",
-      location: "Zone Sahélo-Saharienne",
-      dates: "09/2014 - 12/2014",
-      role: "Chef d'équipe transmissions",
+      id: "OPEX-10-PAMR",
+      name: "Opération Pamir",
+      location: "Afghanistan",
+      dates: "01/2010 - 06/2010",
+      role: "Spécialiste transmissions",
       grade: "Sergent-chef",
       status: "Terminée",
-      classification: "Déclassifié",
-      details: "Affecté à l'équipe de renseignement électronique. A coordonné la collecte de renseignements d'origine électromagnétique (ROEM) et leur analyse pour soutenir les opérations tactiques.",
-      results: "Mission accomplie avec succès. Mention spéciale pour analyse ayant permis l'interception d'un groupe armé.",
-      objectives: ["Interception communications", "Triangulation sources", "Protection convois"],
-      unitSize: "8 personnels"
+      classification: "Partiellement déclassifié",
+      details: "Déployé dans le cadre du mandat de l'OTAN pour stabiliser le pays et sécuriser les infrastructures de la coalition. Positionné sur le premier front, Schneider était situé dans un des premiers véhicules à l'avant d'un convoi le 12 Mai 2010 lorsqu'un véhicule contenant un EEI (Engin Explosif Improvisé) a foncé sur les blindés. Après l'explosion qui a tué 2 militaires français et détruit un blindé, les communications avec le PC ont été rompues. Schneider a établi un relais d'urgence sécurisé et appelé directement les renforts nécessaires, arrivés 14 minutes plus tard.",
+      results: "Promu au grade d'Adjudant suite à son action décisive lors de l'embuscade. 3 pertes du côté des alliés, 12 pertes du côté des insurgés.",
+      objectives: ["Stabilisation du pays", "Sécurisation des infrastructures", "Support aux forces locales"],
+      unitSize: "16 personnels",
+      image: "/lovable-uploads/4b3d35e6-71b9-449b-9a8f-ae76355f7ef1.png"
     },
     {
-      id: "OPEX-16-KTPR",
-      name: "[Classifié]",
-      location: "Moyen-Orient",
-      dates: "03/2016 - 06/2016",
-      role: "Analyste renseignement",
+      id: "OPEX-15-BARK",
+      name: "Opération Barkhane",
+      location: "Mali",
+      dates: "10/2015 - 02/2016",
+      role: "Chef d'équipe transmissions",
       grade: "Adjudant",
       status: "Terminée",
-      classification: "Confidentiel Défense",
-      details: "Mission de collecte de renseignements sur groupes terroristes opérant dans la région. Détails spécifiques non divulgables à ce niveau d'accréditation.",
-      results: "Résultats classifiés. Citation à l'ordre de la brigade.",
-      objectives: ["[ACCÈS RESTREINT]", "Protection ressortissants", "Support opérations spéciales"],
-      unitSize: "6 personnels"
+      classification: "Diffusion limitée",
+      details: "Mission de reconnaissance le 18 Décembre 2015 pour identifier des caches d'armes entre Gao et Ménaka. En tant que leader d'une escouade de 5 hommes, Schneider était en tête du groupe situé derrière deux VBL (Véhicule Blindé Léger). À 16h02, le convoi a commencé sa patrouille lorsqu'un drone allié a repéré des mouvements suspects à 2km au sud. En se déplaçant vers l'emplacement, un VBL a été frappé par un tir de roquette antichar, tuant une personne. Schneider a ordonné un repli défensif tout en assurant des tirs de suppression. Il a déployé un brouilleur de communication pour désorganiser l'ennemi et établi un relais avec les alliés à 1,5km.",
+      results: "Mission accomplie avec 1 perte alliée contre 4 pertes estimées côté ennemi. L'équipe a réussi à revenir à sa base malgré une force ennemie supérieure en nombre (20 contre 17).",
+      objectives: ["Reconnaissance", "Identification caches d'armes", "Neutralisation menaces"],
+      unitSize: "17 personnels",
+      image: "/lovable-uploads/48d3f843-76b4-4704-9c36-8fc6f3df80d9.png"
     },
     {
-      id: "OPEX-18-SDNM",
-      name: "Opération Chammal",
-      location: "Irak-Syrie",
-      dates: "02/2018 - 07/2018",
-      role: "Officier adjoint renseignement",
+      id: "OPEX-18-LYNX",
+      name: "Opération Lynx",
+      location: "Estonie",
+      dates: "03/2018 - 08/2018",
+      role: "Spécialiste cybersécurité",
       grade: "Adjudant-chef",
       status: "Terminée",
-      classification: "Partiellement déclassifié",
-      details: "Affecté à la cellule d'analyse des menaces et de ciblage. A coordonné le recueil et l'analyse du renseignement tactique pour appuyer les opérations aériennes françaises contre Daech.",
-      results: "A contribué à la neutralisation de plusieurs cibles à haute valeur ajoutée. Recommandé pour avancement.",
-      objectives: ["Analyse menaces", "Identification cibles", "Évaluation dommages"],
-      unitSize: "12 personnels"
-    },
-    {
-      id: "OPEX-20-XRTZ",
-      name: "[Classifié]",
-      location: "Afrique Centrale",
-      dates: "11/2020 - 03/2021",
-      role: "Chef section analyse",
-      grade: "Major",
-      status: "Terminée",
-      classification: "Secret Défense",
-      details: "[ACCÈS RESTREINT - NIVEAU SECRET]",
-      results: "[ACCÈS RESTREINT - NIVEAU SECRET]",
-      objectives: ["[ACCÈS RESTREINT]", "[ACCÈS RESTREINT]", "[ACCÈS RESTREINT]"],
-      unitSize: "9 personnels"
-    },
-    {
-      id: "OPEX-22-PNVQ",
-      name: "[Classifié]",
-      location: "[Classifié]",
-      dates: "08/2022 - 01/2023",
-      role: "Chef d'opération spéciale",
-      grade: "Major",
-      status: "Terminée",
-      classification: "Très Secret Défense",
-      details: "[ACCÈS NON AUTORISÉ]",
-      results: "[ACCÈS NON AUTORISÉ]",
-      objectives: ["[ACCÈS NON AUTORISÉ]", "[ACCÈS NON AUTORISÉ]", "[ACCÈS NON AUTORISÉ]"],
-      unitSize: "[ACCÈS NON AUTORISÉ]"
+      classification: "Confidentiel Défense",
+      details: "Déployé dans le cadre de l'OTAN pour lutter contre les cybermenaces russes grandissantes. Le 12 Mai 2018, lors d'un exercice de simulation d'une cyberattaque à la base de Tapa, Schneider était affecté au poste n°12 du N.O.C (Network Operation Center) et co-gérait l'équipe chargée de contenir l'attaque. À 17h48, pendant le test, une centaine d'erreurs et bugs sont apparus sur les écrans. Sur ordre du chef du NOC, Schneider a utilisé des contre-mesures pour détourner l'attaque et préserver les informations sensibles. Il a également coordonné une équipe pour intervenir sur le point d'origine de l'attaque, récupérant des brouilleurs, transmetteurs et serveurs ennemis.",
+      results: "Défense contre la cyberattaque réussie. Récupération de matériel ennemi permettant d'améliorer les protocoles de défense.",
+      objectives: ["Contrer cybermenaces", "Protection infrastructures informatiques", "Formation équipes locales"],
+      unitSize: "12 personnels",
+      image: "/lovable-uploads/5fa33a01-1adf-473a-a3ec-d05b05841244.png"
     }
   ];
 
@@ -102,6 +63,7 @@ const OperationsSection = () => {
   const classificationColors = {
     "Déclassifié": "bg-green-900/30 text-green-500 border-green-900/50",
     "Partiellement déclassifié": "bg-blue-900/30 text-blue-400 border-blue-900/50",
+    "Diffusion limitée": "bg-blue-900/30 text-blue-400 border-blue-900/50",
     "Confidentiel Défense": "bg-yellow-900/30 text-yellow-400 border-yellow-900/50",
     "Secret Défense": "bg-orange-900/30 text-orange-400 border-orange-900/50",
     "Très Secret Défense": "bg-red-900/30 text-red-400 border-red-900/50"
@@ -127,15 +89,15 @@ const OperationsSection = () => {
               </div>
               <div className="p-3 border border-military-green bg-military-dark hover:bg-military-dark/70 transition-all duration-300">
                 <p className="text-xs text-military-lightgray">Durée cumulée</p>
-                <p className="text-xl text-military-orange">27 mois</p>
+                <p className="text-xl text-military-orange">16 mois</p>
               </div>
               <div className="p-3 border border-military-green bg-military-dark hover:bg-military-dark/70 transition-all duration-300">
                 <p className="text-xs text-military-lightgray">Pays/Zones</p>
-                <p className="text-xl text-military-orange">5+</p>
+                <p className="text-xl text-military-orange">3</p>
               </div>
               <div className="p-3 border border-military-green bg-military-dark hover:bg-military-dark/70 transition-all duration-300">
                 <p className="text-xs text-military-lightgray">Décorations</p>
-                <p className="text-xl text-military-orange">4</p>
+                <p className="text-xl text-military-orange">2</p>
               </div>
             </div>
           </div>
@@ -143,16 +105,19 @@ const OperationsSection = () => {
         
         <div className="space-y-6">
           {operations.map((op) => (
-            <div key={op.id} className={`military-frame transition-all duration-500 ${expandedOp === op.id ? 'bg-military-dark/70 border-military-green/70' : 'hover:bg-military-dark/50'}`}>
+            <div 
+              key={op.id} 
+              className={`military-frame transition-all duration-500 ${expandedOp === op.id ? 'bg-military-dark/70 border-military-green/70 transform scale-[1.01]' : 'hover:bg-military-dark/50'}`}
+            >
               <div 
-                className="flex flex-wrap justify-between items-start mb-4 cursor-pointer"
+                className="flex flex-wrap justify-between items-start cursor-pointer"
                 onClick={() => toggleOperation(op.id)}
               >
                 <div className="flex items-start">
                   {expandedOp === op.id ? (
-                    <ChevronUp className="mr-2 text-military-orange h-5 w-5 animate-bounce" />
+                    <ChevronUp className="mr-2 text-military-orange h-5 w-5 animate-pulse" />
                   ) : (
-                    <ChevronDown className="mr-2 text-military-orange h-5 w-5" />
+                    <ChevronDown className="mr-2 text-military-orange h-5 w-5 transform group-hover:translate-y-1 transition-transform" />
                   )}
                   <div>
                     <h3 className="text-lg font-military text-military-orange group-hover:text-white transition-colors">
@@ -172,8 +137,18 @@ const OperationsSection = () => {
               </div>
               
               {expandedOp === op.id && (
-                <div className="space-y-4 text-sm mb-4 animate-accordion-down overflow-hidden">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-4 text-sm mt-4 mb-4 animate-accordion-down overflow-hidden">
+                  {op.image && (
+                    <div className="w-full overflow-hidden border border-military-green mb-4">
+                      <img 
+                        src={op.image}
+                        alt={`Opération ${op.name}`}
+                        className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+                  )}
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="military-frame bg-military-dark/40">
                       <div className="flex items-center mb-2">
                         <Briefcase className="h-4 w-4 mr-2 text-military-orange" />
@@ -187,10 +162,18 @@ const OperationsSection = () => {
                     
                     <div className="military-frame bg-military-dark/40">
                       <div className="flex items-center mb-2">
-                        <Target className="h-4 w-4 mr-2 text-military-orange" />
+                        <Users className="h-4 w-4 mr-2 text-military-orange" />
                         <p className="text-xs text-military-lightgray">EFFECTIFS</p>
                       </div>
                       <p>{op.unitSize}</p>
+                    </div>
+                    
+                    <div className="military-frame bg-military-dark/40">
+                      <div className="flex items-center mb-2">
+                        <Shield className="h-4 w-4 mr-2 text-military-orange" />
+                        <p className="text-xs text-military-lightgray">STATUT</p>
+                      </div>
+                      <p className={op.status === "En cours" ? "text-green-500 animate-pulse" : ""}>{op.status}</p>
                     </div>
                   </div>
 
@@ -199,7 +182,7 @@ const OperationsSection = () => {
                       <FileText className="h-4 w-4 mr-2 text-military-orange" />
                       <p className="text-xs text-military-lightgray">DÉTAILS DE MISSION</p>
                     </div>
-                    <p>{op.details}</p>
+                    <p className="whitespace-pre-line">{op.details}</p>
                   </div>
                   
                   <div className="military-frame bg-military-dark/40">
@@ -225,12 +208,6 @@ const OperationsSection = () => {
                   )}
                 </div>
               )}
-              
-              <div className="text-right text-xs">
-                <span className={op.status === "En cours" ? "text-green-500 animate-pulse" : ""}>
-                  Status: {op.status}
-                </span>
-              </div>
             </div>
           ))}
         </div>
