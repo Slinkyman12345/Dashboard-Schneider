@@ -1,12 +1,62 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import LoginScreen from "@/components/LoginScreen";
+import LoadingScreen from "@/components/LoadingScreen";
+import AlertScreen from "@/components/AlertScreen";
+import useSound from "@/hooks/useSound";
 
 const Index = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loginAttempts, setLoginAttempts] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
+  const { playSound } = useSound();
+
+  useEffect(() => {
+    // Reset login state when component mounts
+    setIsLoggedIn(false);
+    setIsLoading(false);
+    setLoginAttempts(0);
+    setShowAlert(false);
+  }, []);
+
+  const handleLogin = (username: string, password: string): boolean => {
+    if (username === "admin" && password === "admin") {
+      playSound("access-granted");
+      setIsLoggedIn(true);
+      setIsLoading(true);
+      return true;
+    } else {
+      playSound("access-denied");
+      const newAttempts = loginAttempts + 1;
+      setLoginAttempts(newAttempts);
+      if (newAttempts >= 3) {
+        playSound("alert");
+        setShowAlert(true);
+      }
+      return false;
+    }
+  };
+
+  const handleLoadingComplete = () => {
+    navigate("/dashboard");
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-military-dark overflow-hidden relative">
+      <div className="scanner"></div>
+      <div className="noise"></div>
+      <div className="scan-effect"></div>
+      
+      {showAlert ? (
+        <AlertScreen />
+      ) : isLoading ? (
+        <LoadingScreen onComplete={handleLoadingComplete} />
+      ) : (
+        <LoginScreen onLogin={handleLogin} attempts={loginAttempts} />
+      )}
     </div>
   );
 };
