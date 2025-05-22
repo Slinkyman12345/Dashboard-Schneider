@@ -5,10 +5,13 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
-import { Image, FileImage } from "lucide-react";
+import { Image, FileImage, ZoomIn } from "lucide-react";
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 
 const MediaSection = () => {
   const [mediaTab, setMediaTab] = useState("photos");
+  const [selectedMedia, setSelectedMedia] = useState<any>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { toast } = useToast();
   
   // Photos data
@@ -157,6 +160,12 @@ const MediaSection = () => {
     }
   };
 
+  // Handler for image click to open the enlargement dialog
+  const handleImageClick = (item: any) => {
+    setSelectedMedia(item);
+    setDialogOpen(true);
+  };
+
   return (
     <div className="space-y-6">
       <div className="military-frame animate-fade-in">
@@ -187,7 +196,7 @@ const MediaSection = () => {
                   className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer transform hover:scale-[1.02] transition-all duration-300"
                   onClick={() => handleMediaClick(photo)}
                 >
-                  <div className="mb-3 overflow-hidden">
+                  <div className="mb-3 overflow-hidden relative">
                     <AspectRatio ratio={4/3} className="w-full">
                       <img 
                         src={photo.thumbnail} 
@@ -195,6 +204,16 @@ const MediaSection = () => {
                         className="w-full h-full object-cover border border-military-green hover:opacity-90 transition-opacity"
                       />
                     </AspectRatio>
+                    <button 
+                      className="absolute top-2 right-2 p-1 bg-military-dark/70 rounded hover:bg-military-dark transition-colors border border-military-green"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleImageClick(photo);
+                      }}
+                      title="Agrandir l'image"
+                    >
+                      <ZoomIn size={18} className="text-military-green" />
+                    </button>
                   </div>
                   
                   <div className="p-2">
@@ -311,7 +330,7 @@ const MediaSection = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="mb-3 overflow-hidden">
+                    <div className="mb-3 overflow-hidden relative">
                       <AspectRatio ratio={4/3} className="w-full">
                         <img 
                           src={doc.thumbnail} 
@@ -319,6 +338,16 @@ const MediaSection = () => {
                           className="w-full h-full object-cover border border-military-green hover:opacity-90 transition-opacity"
                         />
                       </AspectRatio>
+                      <button 
+                        className="absolute top-2 right-2 p-1 bg-military-dark/70 rounded hover:bg-military-dark transition-colors border border-military-green"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleImageClick(doc);
+                        }}
+                        title="Agrandir l'image"
+                      >
+                        <ZoomIn size={18} className="text-military-green" />
+                      </button>
                     </div>
                   )}
                   
@@ -354,9 +383,37 @@ const MediaSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Image Enlargement Dialog */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="bg-military-dark border-military-green max-w-4xl w-[90vw] p-0 overflow-hidden">
+          <div className="p-4 relative">
+            <h3 className="text-military-gold text-xl mb-2 pr-8">{selectedMedia?.title}</h3>
+            <DialogClose className="absolute right-4 top-4 text-military-lightgold hover:text-military-gold" />
+            
+            <div className="mt-2 mb-4 border border-military-green">
+              <img 
+                src={selectedMedia?.thumbnail} 
+                alt={selectedMedia?.title}
+                className="w-full object-contain max-h-[70vh]"
+              />
+            </div>
+            
+            <div className="p-3 bg-military-dark/70 border border-military-green">
+              <div className="flex justify-between mb-2">
+                <span className="text-sm text-military-lightgold">{selectedMedia?.id}</span>
+                <span className="text-sm text-military-lightgold">{selectedMedia?.date}</span>
+              </div>
+              <p className="text-sm mb-3">{selectedMedia?.description}</p>
+              <div className={`text-xs inline-block px-3 py-1 rounded border ${classificationColors[selectedMedia?.classification as keyof typeof classificationColors] || ""}`}>
+                {selectedMedia?.classification}
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
 
 export default MediaSection;
-
