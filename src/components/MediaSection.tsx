@@ -5,7 +5,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
-import { Image } from "lucide-react";
+import { Image, FileImage } from "lucide-react";
 
 const MediaSection = () => {
   const [mediaTab, setMediaTab] = useState("photos");
@@ -18,7 +18,7 @@ const MediaSection = () => {
       title: "Entraînement en milieu réel",
       date: "04/03/2016",
       classification: "Non classifié",
-      description: "Schneider lors d'un exercice d'entraînement en conditions réelles.",
+      description: "Schneider lors d'un exercice d'entraînement en conditions réelles. Durant cet exercice, il démontre ses compétences tactiques et sa maîtrise des protocoles de sécurité.",
       thumbnail: "/lovable-uploads/65c58973-56f4-4dfd-b78d-143bbed0e749.png"
     },
     {
@@ -26,7 +26,7 @@ const MediaSection = () => {
       title: "Opération Pamir - Afghanistan",
       date: "12/05/2010",
       classification: "Partiellement déclassifié",
-      description: "Convoi militaire lors de l'Opération Pamir en Afghanistan où Schneider a établi un relais d'urgence.",
+      description: "Convoi militaire lors de l'Opération Pamir en Afghanistan où Schneider a établi un relais d'urgence sécurisé suite à une attaque qui a rompu les communications avec le poste de commandement.",
       thumbnail: "/lovable-uploads/4b3d35e6-71b9-449b-9a8f-ae76355f7ef1.png"
     },
     {
@@ -34,7 +34,7 @@ const MediaSection = () => {
       title: "Opération Barkhane - Mali",
       date: "18/12/2015",
       classification: "Diffusion limitée",
-      description: "Forces déployées lors de l'Opération Barkhane au Mali où Schneider a dirigé une équipe en mission de reconnaissance.",
+      description: "Forces déployées lors de l'Opération Barkhane au Mali où Schneider a dirigé une équipe en mission de reconnaissance entre Gao et Ménaka, faisant face à une embuscade de combattants ennemis.",
       thumbnail: "/lovable-uploads/48d3f843-76b4-4704-9c36-8fc6f3df80d9.png"
     },
     {
@@ -42,7 +42,7 @@ const MediaSection = () => {
       title: "Opération Lynx - Estonie",
       date: "12/05/2018",
       classification: "Diffusion limitée",
-      description: "Schneider et son équipe lors de l'opération Lynx en Estonie, contrant des cybermenaces.",
+      description: "Schneider et son équipe lors de l'opération Lynx en Estonie, participant à un exercice de simulation d'une cyberattaque dans la base de Tapa où il co-gérait l'équipe chargée de contenir l'attaque.",
       thumbnail: "/lovable-uploads/5fa33a01-1adf-473a-a3ec-d05b05841244.png"
     },
     {
@@ -50,7 +50,7 @@ const MediaSection = () => {
       title: "Photo d'identité officielle",
       date: "10/01/2020",
       classification: "Non classifié",
-      description: "Photo d'identité officielle de Schneider Alexander pour les documents militaires.",
+      description: "Photo d'identité officielle de Schneider Alexander pour les documents militaires. Cette photo est utilisée dans ses dossiers administratifs et d'identification.",
       thumbnail: "/lovable-uploads/11002651-daf9-48f1-b1ae-2df34776289f.png"
     }
   ];
@@ -63,7 +63,7 @@ const MediaSection = () => {
       date: "11/04/2017",
       duration: "2:14",
       classification: "Non classifié",
-      description: "Évaluation des compétences de tir de précision. Score: 578/600.",
+      description: "Évaluation des compétences de tir de précision. Score: 578/600. Cet exercice démontre l'excellente maîtrise des armes à feu par Schneider.",
       thumbnail: "/placeholder.svg"
     },
     {
@@ -72,7 +72,7 @@ const MediaSection = () => {
       date: "15/08/2018",
       duration: "17:32",
       classification: "Confidentiel",
-      description: "Schneider présentant une analyse de menace cyber sur les réseaux militaires.",
+      description: "Schneider présentant une analyse de menace cyber sur les réseaux militaires, incluant des stratégies de défense et de contre-mesures spécifiques.",
       thumbnail: "/placeholder.svg"
     }
   ];
@@ -85,7 +85,7 @@ const MediaSection = () => {
       date: "17/06/2016",
       duration: "4:23",
       classification: "Secret Défense",
-      description: "Compte-rendu verbal après mission de reconnaissance. Contenu partiellement censuré.",
+      description: "Compte-rendu verbal après mission de reconnaissance. Contenu partiellement censuré pour des raisons de sécurité nationale.",
       thumbnail: "/placeholder.svg"
     },
     {
@@ -94,7 +94,7 @@ const MediaSection = () => {
       date: "22/03/2018",
       duration: "1:47",
       classification: "Confidentiel",
-      description: "Enregistrement de Schneider coordonnant une extraction d'urgence. Usage pédagogique autorisé.",
+      description: "Enregistrement de Schneider coordonnant une extraction d'urgence. Usage pédagogique autorisé pour la formation des nouvelles recrues.",
       thumbnail: "/placeholder.svg"
     }
   ];
@@ -102,12 +102,21 @@ const MediaSection = () => {
   // Documents data
   const documents = [
     {
+      id: "DOC-2005-001",
+      title: "Diplôme du Baccalauréat Scientifique",
+      date: "22/07/2005",
+      type: "PDF",
+      classification: "Non classifié",
+      description: "Diplôme du Baccalauréat Scientifique obtenu par Schneider Alexander avec mention Assez-Bien au Deutsch-Französisches Gymnasium (DFG) Saarbrücken.",
+      thumbnail: "/lovable-uploads/e20981c0-133c-4561-99ba-6e2ef9ed8b9e.png"
+    },
+    {
       id: "DOC-2015-103",
       title: "Rapport d'expertise technique",
       date: "15/09/2015",
       type: "PDF",
       classification: "Diffusion limitée",
-      description: "Analyse technique du système de communication [CENSURÉ] capturé lors de l'opération [CENSURÉ].",
+      description: "Analyse technique du système de communication [CENSURÉ] capturé lors de l'opération [CENSURÉ]. Ce rapport inclut des recommandations pour renforcer les systèmes alliés.",
       thumbnail: "/placeholder.svg"
     },
     {
@@ -116,7 +125,7 @@ const MediaSection = () => {
       date: "27/04/2016",
       type: "DOCX",
       classification: "Confidentiel",
-      description: "Document rédigé par Schneider concernant l'amélioration des protocoles de communication cryptée en terrain hostile.",
+      description: "Document rédigé par Schneider concernant l'amélioration des protocoles de communication cryptée en terrain hostile, basé sur son expérience en Afghanistan et au Mali.",
       thumbnail: "/placeholder.svg"
     }
   ];
@@ -178,19 +187,14 @@ const MediaSection = () => {
                   className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer transform hover:scale-[1.02] transition-all duration-300"
                   onClick={() => handleMediaClick(photo)}
                 >
-                  <div className="aspect-w-16 aspect-h-9 mb-3 overflow-hidden">
-                    <AspectRatio ratio={4/3}>
+                  <div className="mb-3 overflow-hidden">
+                    <AspectRatio ratio={4/3} className="w-full">
                       <img 
                         src={photo.thumbnail} 
                         alt={photo.title}
                         className="w-full h-full object-cover border border-military-green hover:opacity-90 transition-opacity"
                       />
                     </AspectRatio>
-                    {photo.classification.includes("Secret") && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/70 text-military-red font-bold animate-pulse">
-                        ACCÈS RESTREINT
-                      </div>
-                    )}
                   </div>
                   
                   <div className="p-2">
@@ -218,8 +222,8 @@ const MediaSection = () => {
                   className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer transform hover:scale-[1.02] transition-all duration-300"
                   onClick={() => handleMediaClick(video)}
                 >
-                  <div className="aspect-w-16 aspect-h-9 relative mb-3">
-                    <AspectRatio ratio={16/9}>
+                  <div className="relative mb-3">
+                    <AspectRatio ratio={16/9} className="w-full">
                       <div className="w-full h-full border border-military-green bg-military-dark/80 flex items-center justify-center">
                         <Image className="w-16 h-16 text-military-lightgray opacity-50" />
                       </div>
@@ -228,11 +232,6 @@ const MediaSection = () => {
                           <div className="w-0 h-0 border-y-8 border-y-transparent border-l-14 border-l-white ml-1"></div>
                         </div>
                       </div>
-                      {video.classification.includes("Secret") && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/70 text-military-red font-bold animate-pulse">
-                          ACCÈS RESTREINT
-                        </div>
-                      )}
                     </AspectRatio>
                   </div>
                   
@@ -301,20 +300,34 @@ const MediaSection = () => {
                   className="military-frame bg-military-dark/50 overflow-hidden hover:bg-military-dark/70 transition-colors cursor-pointer transform hover:scale-[1.02] transition-all duration-300"
                   onClick={() => handleMediaClick(doc)}
                 >
-                  <div className="p-3 flex items-center border border-military-green mb-3">
-                    <div className="w-12 h-14 bg-military-dark/80 border border-military-lightgray flex items-center justify-center text-xs">
-                      {doc.type}
+                  {doc.thumbnail.includes("/placeholder.svg") ? (
+                    <div className="p-3 flex items-center border border-military-green mb-3">
+                      <div className="w-12 h-14 bg-military-dark/80 border border-military-lightgray flex items-center justify-center text-xs">
+                        {doc.type}
+                      </div>
+                      <div className="ml-4">
+                        <h3 className="font-bold text-sm truncate">{doc.title}</h3>
+                        <p className="text-xs">{doc.id}</p>
+                      </div>
                     </div>
-                    <div className="ml-4">
-                      <h3 className="font-bold text-sm truncate">{doc.title}</h3>
-                      <p className="text-xs">{doc.id}</p>
+                  ) : (
+                    <div className="mb-3 overflow-hidden">
+                      <AspectRatio ratio={4/3} className="w-full">
+                        <img 
+                          src={doc.thumbnail} 
+                          alt={doc.title}
+                          className="w-full h-full object-cover border border-military-green hover:opacity-90 transition-opacity"
+                        />
+                      </AspectRatio>
                     </div>
-                  </div>
+                  )}
                   
                   <div className="p-2">
-                    <div className="flex justify-between mb-2">
-                      <span className="text-xs">{doc.date}</span>
+                    <div className="flex justify-between mb-1">
+                      <h3 className="font-bold text-sm truncate">{doc.title}</h3>
+                      <span className="text-xs text-military-lightgray">{doc.id}</span>
                     </div>
+                    <p className="text-xs mb-2">{doc.date}</p>
                     <p className="text-sm mb-2">{doc.description}</p>
                     <div className={`text-xs px-2 py-1 rounded border text-center ${classificationColors[doc.classification as keyof typeof classificationColors] || ""}`}>
                       {doc.classification}
@@ -346,3 +359,4 @@ const MediaSection = () => {
 };
 
 export default MediaSection;
+
