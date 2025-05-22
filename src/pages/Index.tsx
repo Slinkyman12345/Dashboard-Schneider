@@ -46,9 +46,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-military-dark overflow-hidden relative">
-      <div className="scanner"></div>
       <div className="noise"></div>
-      <div className="scan-effect"></div>
       
       {showAlert ? (
         <AlertScreen />

@@ -10,6 +10,7 @@ import {
   FileImage
 } from "lucide-react";
 import useSound from "@/hooks/useSound";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface SidebarMenuProps {
   activeTab: string;
@@ -37,9 +38,16 @@ const SidebarMenu = ({ activeTab, onTabChange }: SidebarMenuProps) => {
 
   return (
     <div className="p-4">
-      <div className="flex justify-center mb-8">
-        <div className="w-16 h-16 rounded-full border-2 border-military-gold flex items-center justify-center">
-          <div className="military-emblem text-military-gold">★</div>
+      <div className="flex justify-center mb-6">
+        <div className="w-40">
+          <AspectRatio ratio={16/9}>
+            <img 
+              src="/lovable-uploads/7ed29ddb-7bf4-46ce-b22b-2f16fcc29075.png" 
+              alt="Logo des Forces Armées Françaises" 
+              className="w-full h-full object-contain"
+            />
+          </AspectRatio>
+          <p className="text-xs text-center text-military-lightgold mt-1">Forces Armées Françaises</p>
         </div>
       </div>
       

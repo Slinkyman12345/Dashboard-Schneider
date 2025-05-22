@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Shield, Key, User } from "lucide-react";
 import useSound from "@/hooks/useSound";
 import TerminalText from "./TerminalText";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface LoginScreenProps {
   onLogin: (username: string, password: string) => boolean;
@@ -70,6 +71,19 @@ const LoginScreen = ({ onLogin, attempts }: LoginScreenProps) => {
               <Shield className="text-military-khaki" />
               <span className="text-xs text-military-lightgray">TERMINAL SÉCURISÉ :: DÉFENSE NATIONALE</span>
               <div className="h-2 w-2 rounded-full bg-military-red animate-pulse"></div>
+            </div>
+            
+            <div className="flex justify-center mb-4">
+              <div className="w-40 h-auto">
+                <AspectRatio ratio={1/1.25}>
+                  <img 
+                    src="/lovable-uploads/593ddac3-e5c9-4a4d-a959-3f078cb2309e.png" 
+                    alt="Logo DRHAT - Direction des Ressources Humaines de l'Armée de Terre" 
+                    className="w-full h-full object-contain"
+                  />
+                </AspectRatio>
+                <p className="text-xs text-center text-military-khaki mt-2">Direction des Ressources Humaines de l'Armée de Terre</p>
+              </div>
             </div>
             
             <TerminalText text="Initialisation du système d'accès sécurisé..." delay={20} />
