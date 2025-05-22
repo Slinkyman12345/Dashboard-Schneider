@@ -78,7 +78,7 @@ const SidebarMenu = ({ activeTab, onTabChange }: SidebarMenuProps) => {
           </div>
           <div className="flex justify-between">
             <span>Status système:</span>
-            <span className="text-green-500">ACTIF</span>
+            <span className="text-red-500">INACTIF</span>
           </div>
         </div>
       </div>

@@ -115,7 +115,7 @@ const PsychProfileSection = () => {
                       className="absolute top-0 h-5 border-l-2 border-white"
                       style={{ left: '50%' }}
                     ></div>
-                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs text-white">
+                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs text-white font-medium">
                       {trait.label}
                     </div>
                   </div>
@@ -177,9 +177,6 @@ const PsychProfileSection = () => {
           <div>
             <p>Dernière évaluation: 17/02/2023</p>
             <p>Prochain examen psychologique prévu: 18/08/2023</p>
-          </div>
-          <div className="bg-military-dark/60 p-1 px-2 text-military-orange">
-            NIVEAU DE CONFIDENTIALITÉ: ÉLEVÉ
           </div>
         </div>
       </div>

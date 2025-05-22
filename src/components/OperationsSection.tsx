@@ -25,7 +25,8 @@ const OperationsSection = () => {
       results: "Promu au grade d'Adjudant suite à son action décisive lors de l'embuscade. 3 pertes du côté des alliés, 12 pertes du côté des insurgés.",
       objectives: ["Stabilisation du pays", "Sécurisation des infrastructures", "Support aux forces locales"],
       unitSize: "16 personnels",
-      image: "/lovable-uploads/4b3d35e6-71b9-449b-9a8f-ae76355f7ef1.png"
+      image: "/lovable-uploads/4b3d35e6-71b9-449b-9a8f-ae76355f7ef1.png",
+      imageDesc: "Photo prise lors de l'opération Pamir en Afghanistan, 2010"
     },
     {
       id: "OPEX-15-BARK",
@@ -40,7 +41,8 @@ const OperationsSection = () => {
       results: "Mission accomplie avec 1 perte alliée contre 4 pertes estimées côté ennemi. L'équipe a réussi à revenir à sa base malgré une force ennemie supérieure en nombre (20 contre 17).",
       objectives: ["Reconnaissance", "Identification caches d'armes", "Neutralisation menaces"],
       unitSize: "17 personnels",
-      image: "/lovable-uploads/48d3f843-76b4-4704-9c36-8fc6f3df80d9.png"
+      image: "/lovable-uploads/48d3f843-76b4-4704-9c36-8fc6f3df80d9.png",
+      imageDesc: "Opération Barkhane au Mali, 2015 - Mission de reconnaissance"
     },
     {
       id: "OPEX-18-LYNX",
@@ -55,7 +57,8 @@ const OperationsSection = () => {
       results: "Défense contre la cyberattaque réussie. Récupération de matériel ennemi permettant d'améliorer les protocoles de défense.",
       objectives: ["Contrer cybermenaces", "Protection infrastructures informatiques", "Formation équipes locales"],
       unitSize: "12 personnels",
-      image: "/lovable-uploads/5fa33a01-1adf-473a-a3ec-d05b05841244.png"
+      image: "/lovable-uploads/5fa33a01-1adf-473a-a3ec-d05b05841244.png",
+      imageDesc: "Base de Tapa, Estonie - Opération Lynx, 2018"
     }
   ];
 
@@ -139,12 +142,19 @@ const OperationsSection = () => {
               {expandedOp === op.id && (
                 <div className="space-y-4 text-sm mt-4 mb-4 animate-accordion-down overflow-hidden">
                   {op.image && (
-                    <div className="w-full overflow-hidden border border-military-green mb-4">
-                      <img 
-                        src={op.image}
-                        alt={`Opération ${op.name}`}
-                        className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
-                      />
+                    <div className="w-full overflow-hidden border border-military-green mb-1">
+                      <div className="relative">
+                        <img 
+                          src={op.image}
+                          alt={`Opération ${op.name}`}
+                          className="w-full aspect-video object-cover hover:scale-105 transition-transform duration-700"
+                        />
+                        {op.imageDesc && (
+                          <p className="text-xs text-military-lightgold p-2 text-center border-t border-military-green/50 bg-military-dark/70">
+                            {op.imageDesc}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   )}
                   
@@ -197,7 +207,7 @@ const OperationsSection = () => {
                     <div className="military-frame bg-military-dark/40">
                       <div className="flex items-center mb-2">
                         <Target className="h-4 w-4 mr-2 text-military-orange" />
-                        <p className="text-xs text-military-lightgray">OBJECTIFS</p>
+                        <p className="text-xs text-military-lightgold">OBJECTIFS</p>
                       </div>
                       <ul className="list-disc list-inside">
                         {op.objectives.map((obj, idx) => (
@@ -213,13 +223,9 @@ const OperationsSection = () => {
         </div>
         
         <div className="mt-6 pt-4 border-t border-military-green flex items-center justify-between">
-          <div className="text-xs text-military-lightgray">
+          <div className="text-xs text-military-lightgold">
             <TerminalText text="Dossier OPEX mis à jour le 28/04/2023" delay={30} />
-            <TerminalText text="Classification: CONFIDENTIEL DÉFENSE" delay={30} />
-          </div>
-          
-          <div className="text-xs border border-military-red bg-military-red/10 p-1 px-2 text-military-red animate-pulse">
-            ACCÈS RÉGULÉ
+            <TerminalText text="Classification: AUTORISÉ" delay={30} />
           </div>
         </div>
       </div>

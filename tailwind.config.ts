@@ -96,10 +96,6 @@ export default {
 					from: { height: 'var(--radix-accordion-content-height)' },
 					to: { height: '0' }
 				},
-				'scan-line': {
-					'0%': { transform: 'translateY(0)' },
-					'100%': { transform: 'translateY(100vh)' }
-				},
 				'text-flicker': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.5' }
@@ -140,7 +136,6 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'scan-line': 'scan-line 4s linear infinite',
 				'text-flicker': 'text-flicker 0.5s infinite',
 				'pulse-red': 'pulse-red 1s infinite',
 				'rotate-logo': 'rotate-logo 4s linear infinite',
@@ -153,5 +148,57 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function({ addBase }) {
+			addBase({
+				'.military-frame': {
+					'@apply bg-military-darkblue/80 border border-military-gold/70 p-4 rounded-sm': {},
+				},
+				'.military-header': {
+					'@apply font-military uppercase tracking-wider text-military-gold': {},
+				},
+				'.font-military': {
+					'text-rendering': 'optimizeLegibility',
+					'-webkit-font-smoothing': 'antialiased',
+					'-moz-osx-font-smoothing': 'grayscale',
+				},
+				'.text-military-gold, .text-military-lightgold': {
+					'text-rendering': 'optimizeLegibility',
+					'-webkit-font-smoothing': 'antialiased',
+					'-moz-osx-font-smoothing': 'grayscale',
+					'text-shadow': '0 0 1px rgba(212, 175, 55, 0.3)',
+				},
+				'html': {
+					'text-rendering': 'optimizeLegibility',
+					'-webkit-font-smoothing': 'antialiased',
+					'-moz-osx-font-smoothing': 'grayscale',
+				},
+				'.crt-overlay': {
+					'@apply pointer-events-none': {},
+					'background': 'linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%)',
+					'background-size': '100% 100%',
+					'background-repeat': 'no-repeat',
+					'position': 'absolute',
+					'top': '0',
+					'left': '0',
+					'right': '0',
+					'bottom': '0',
+					'z-index': '10',
+				},
+				'.noise': {
+					'@apply pointer-events-none': {},
+					'position': 'fixed',
+					'top': '0',
+					'left': '0',
+					'width': '100%',
+					'height': '100%',
+					'background-image': 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAPklEQVRoge3NQQEAMAzDsB7LxP85rcT5rAFqZm7u9pnBFuOTEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQkFXkAdohCDFwEMvlAAAAAElFTkSuQmCC")',
+					'opacity': '0.05',
+					'z-index': '20',
+					'pointer-events': 'none',
+				}
+			});
+		}
+	],
 } satisfies Config;

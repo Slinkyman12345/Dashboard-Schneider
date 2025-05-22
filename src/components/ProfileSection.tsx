@@ -10,11 +10,16 @@ const ProfileSection = () => {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="md:col-span-1">
             <div className="military-frame h-full flex flex-col bg-darker-blue">
-              <img 
-                src="/lovable-uploads/11002651-daf9-48f1-b1ae-2df34776289f.png" 
-                alt="Photo d'identité militaire" 
-                className="w-full h-64 object-cover mb-4 border border-military-gold hover:brightness-110 transition-all duration-300"
-              />
+              <div className="relative">
+                <img 
+                  src="/lovable-uploads/11002651-daf9-48f1-b1ae-2df34776289f.png" 
+                  alt="Photo d'identité militaire" 
+                  className="w-full object-cover mb-1 border border-military-gold hover:brightness-110 transition-all duration-300 aspect-[3/4] max-h-[350px]"
+                />
+                <p className="text-xs text-military-lightgold p-2 text-center border-t border-military-gold/50 bg-military-dark/70">
+                  Photo d'identité officielle - Personnel militaire
+                </p>
+              </div>
               <div className="bg-military-dark/80 p-2 text-center mb-4 backdrop-blur-sm border-t border-b border-military-gold">
                 <p className="text-sm text-military-gold">SCHNEIDER, Alexander</p>
                 <p className="text-xs text-military-lightgold">Sous-Officier</p>
@@ -26,7 +31,7 @@ const ProfileSection = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-military-lightgold">Status:</span>
-                  <span className="text-green-500">ACTIF</span>
+                  <span className="text-red-500">INACTIF</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-military-lightgold">Habilitation:</span>

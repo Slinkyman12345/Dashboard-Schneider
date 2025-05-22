@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sidebar, SidebarContent } from "@/components/ui/sidebar";
@@ -66,9 +67,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-military-darkblue text-military-gold flex relative overflow-hidden">
       {/* Effets globaux et animations */}
-      <div className="scanner"></div>
       <div className="noise"></div>
-      <div className="scan-effect"></div>
       
       {/* Animation de chargement au démarrage */}
       {isInitialLoad && (
@@ -209,7 +208,6 @@ const Dashboard = () => {
       
       {/* Overlay pour effet "écran ancien" */}
       <div className="fixed inset-0 pointer-events-none z-30">
-        <div className="scan-line"></div>
         <div className="crt-overlay"></div>
       </div>
     </div>
