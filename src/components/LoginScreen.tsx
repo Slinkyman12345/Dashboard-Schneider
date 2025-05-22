@@ -75,11 +75,11 @@ const LoginScreen = ({ onLogin, attempts }: LoginScreenProps) => {
             
             <div className="flex justify-center mb-4">
               <div className="w-40 h-auto">
-                <AspectRatio ratio={1/1.25}>
+                <AspectRatio ratio={1/1}>
                   <img 
-                    src="/lovable-uploads/593ddac3-e5c9-4a4d-a959-3f078cb2309e.png" 
+                    src="/lovable-uploads/397fe1f0-2d27-44fd-86fe-28db388851b8.png" 
                     alt="Logo DRHAT - Direction des Ressources Humaines de l'Armée de Terre" 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain animate-spin-slow"
                   />
                 </AspectRatio>
                 <p className="text-xs text-center text-military-khaki mt-2">Direction des Ressources Humaines de l'Armée de Terre</p>

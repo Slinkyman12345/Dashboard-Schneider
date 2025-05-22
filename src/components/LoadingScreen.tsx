@@ -60,11 +60,11 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         </div>
         
         <div className="mt-4 flex justify-center mb-8">
-          <div className="w-24 h-24 border-4 border-military-khaki rounded-full flex items-center justify-center animate-rotate-logo">
+          <div className="w-24 h-24 border-4 border-military-khaki rounded-full flex items-center justify-center">
             <img 
-              src="/placeholder.svg" 
-              alt="Logo Armée de Terre" 
-              className="w-16 h-16 animate-pulse"
+              src="/lovable-uploads/397fe1f0-2d27-44fd-86fe-28db388851b8.png" 
+              alt="Logo DRHAT - Direction des Ressources Humaines de l'Armée de Terre" 
+              className="w-20 h-20 animate-spin-slow"
             />
           </div>
         </div>
