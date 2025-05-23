@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import LoginScreen from "@/components/LoginScreen";
 import LoadingScreen from "@/components/LoadingScreen";
 import AlertScreen from "@/components/AlertScreen";
-import HomeAssignmentsSection from "@/components/HomeAssignmentsSection";
 import useSound from "@/hooks/useSound";
 
 const Index = () => {
@@ -12,7 +11,6 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loginAttempts, setLoginAttempts] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
-  const [showAssignments, setShowAssignments] = useState(false);
   const navigate = useNavigate();
   const { playSound } = useSound();
 
@@ -22,7 +20,6 @@ const Index = () => {
     setIsLoading(false);
     setLoginAttempts(0);
     setShowAlert(false);
-    setShowAssignments(false);
   }, []);
 
   const handleLogin = (username: string, password: string): boolean => {
@@ -44,12 +41,8 @@ const Index = () => {
   };
 
   const handleLoadingComplete = () => {
-    // Uncomment to navigate directly to dashboard
-    // navigate("/dashboard");
-    
-    // Show assignments on home instead of redirecting
-    setIsLoading(false);
-    setShowAssignments(true);
+    // Navigate directly to dashboard
+    navigate("/dashboard");
   };
 
   return (
@@ -64,10 +57,6 @@ const Index = () => {
         <div className="container mx-auto px-4 py-8">
           {!isLoggedIn && (
             <LoginScreen onLogin={handleLogin} attempts={loginAttempts} />
-          )}
-          
-          {(isLoggedIn && showAssignments) && (
-            <HomeAssignmentsSection />
           )}
         </div>
       )}

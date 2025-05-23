@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useRef, useEffect } from "react";
@@ -9,7 +8,6 @@ import { Progress } from "@/components/ui/progress";
 
 const AssignmentsSection = () => {
   const [timelineTab, setTimelineTab] = useState("all");
-  const [isLatestAssignmentClassified, setIsLatestAssignmentClassified] = useState(true);
   const [showDeletionAnimation, setShowDeletionAnimation] = useState(false);
   const [deletionProgress, setDeletionProgress] = useState(0);
   const { playSound } = useSound();
