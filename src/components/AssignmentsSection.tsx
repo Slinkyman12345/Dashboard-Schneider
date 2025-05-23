@@ -1,15 +1,19 @@
 
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { AlertTriangle, Lock } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { AlertTriangle, Lock, Shield, Trash2 } from "lucide-react";
 import useSound from "@/hooks/useSound";
+import { Progress } from "@/components/ui/progress";
 
 const AssignmentsSection = () => {
   const [timelineTab, setTimelineTab] = useState("all");
   const [isLatestAssignmentClassified, setIsLatestAssignmentClassified] = useState(true);
+  const [showDeletionAnimation, setShowDeletionAnimation] = useState(false);
+  const [deletionProgress, setDeletionProgress] = useState(0);
   const { playSound } = useSound();
+  const progressIntervalRef = useRef<number | null>(null);
   
   const assignments = [
     {
@@ -72,12 +76,84 @@ const AssignmentsSection = () => {
       });
 
   const handleRevealClassified = () => {
-    playSound("terminal-beep");
-    setIsLatestAssignmentClassified(false);
+    playSound("alert-siren");
+    setShowDeletionAnimation(true);
+    
+    // Start the progress bar animation
+    let progress = 0;
+    progressIntervalRef.current = window.setInterval(() => {
+      progress += 2;
+      setDeletionProgress(progress);
+      
+      if (progress >= 100) {
+        clearInterval(progressIntervalRef.current as number);
+        
+        // After animation completes, redirect to login page
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      }
+    }, 80);
   };
+  
+  // Clean up interval on component unmount
+  useEffect(() => {
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="space-y-6">
+      <AnimatePresence>
+        {showDeletionAnimation && (
+          <motion.div 
+            className="fixed inset-0 bg-black/90 z-50 flex flex-col justify-center items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+              className="max-w-md w-full flex flex-col items-center"
+            >
+              <div className="text-red-500 mb-4">
+                <Shield size={80} className="animate-pulse" />
+              </div>
+              
+              <h2 className="text-red-500 text-3xl font-military mb-2 text-center">ALERTE SÉCURITÉ</h2>
+              <p className="text-military-lightgold text-xl mb-6 text-center">
+                Suppression de votre poste et des données en cours
+              </p>
+              
+              <div className="w-full mb-2">
+                <Progress 
+                  value={deletionProgress} 
+                  className="h-4 bg-military-dark/60"
+                  indicatorClassName="bg-red-600" 
+                />
+              </div>
+              
+              <div className="text-sm text-military-lightgold mb-8 w-full flex justify-between">
+                <span>{deletionProgress}%</span>
+                <span className="animate-pulse">Procédure irréversible</span>
+              </div>
+              
+              <div className="flex items-center text-red-500 text-sm">
+                <Trash2 size={16} className="mr-2" />
+                <span className="animate-typing overflow-hidden whitespace-nowrap w-full">
+                  Suppression des données d'accès. Votre compte sera désactivé.
+                </span>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
       <div className="military-frame">
         <h2 className="military-header text-xl mb-4">AFFECTATIONS :: SCHNEIDER, Alexander</h2>
         
@@ -105,7 +181,7 @@ const AssignmentsSection = () => {
             <div key={index} className="mb-10 relative">
               <div className="absolute -left-10 w-5 h-5 rounded-full bg-military-green border-2 border-military-khaki"></div>
               
-              {assignment.period === "2020-présent" && isLatestAssignmentClassified ? (
+              {assignment.period === "2020-présent" ? (
                 <motion.div 
                   className="military-frame bg-military-dark border-red-900/70"
                   initial={{ opacity: 0 }}
@@ -181,26 +257,6 @@ const AssignmentsSection = () => {
                       <p className="text-xs text-military-lightgray mb-1">NOTES</p>
                       <p>{assignment.notes}</p>
                     </div>
-
-                    {assignment.period === "2020-présent" && !isLatestAssignmentClassified && (
-                      <div className="mt-4 border-t border-military-green/30 pt-4">
-                        <div className="flex items-center text-xs text-red-400 mb-2">
-                          <AlertTriangle size={12} className="mr-1" />
-                          <span>INFORMATIONS CLASSIFIÉES - ACCÈS LIMITÉ</span>
-                        </div>
-                        <div className="space-y-2 relative">
-                          <p className="text-sm">
-                            Mission actuelle: <span className="bg-red-900/30 px-2 py-0.5">████████████</span> en liaison avec <span className="bg-red-900/30 px-2 py-0.5">██████</span>
-                          </p>
-                          <p className="text-sm">
-                            Opération en cours: <span className="bg-red-900/30 px-2 py-0.5">██████████████</span>
-                          </p>
-                          <p className="text-sm">
-                            Statut: <span className="text-red-500">ACTIF</span>
-                          </p>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </div>
               )}
