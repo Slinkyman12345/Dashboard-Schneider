@@ -70,7 +70,7 @@ const LoginScreen = ({ onLogin, attempts }: LoginScreenProps) => {
           <div className="mb-8 military-frame animate-fade-in rounded-xl overflow-hidden">
             <div className="flex items-center justify-between mb-4 px-2">
               <Shield className="text-military-khaki" />
-              <span className="text-xs text-military-lightgray bg-military-dark/50 px-3 py-1 rounded-full">TERMINAL SÉCURISÉ :: DÉFENSE NATIONALE</span>
+              <span className="text-xs text-military-lightgray bg-military-dark/50 px-3 py-1 rounded-full">TERMINAL SÉCURISÉ :: FONDATION SCP</span>
               <div className="h-3 w-3 rounded-full bg-military-red animate-pulse"></div>
             </div>
             
@@ -83,15 +83,15 @@ const LoginScreen = ({ onLogin, attempts }: LoginScreenProps) => {
                     className="w-full h-full object-contain animate-spin-slow"
                   />
                 </AspectRatio>
-                <p className="text-xs text-center text-military-khaki mt-2">Direction des Ressources Humaines de l'Armée de Terre</p>
+                <p className="text-xs text-center text-military-khaki mt-2">Direction des Ressources de l'Autorité du Haut-Commandement</p>
               </div>
             </div>
             
             <div className="bg-military-dark/30 p-3 rounded-lg mb-3">
               <TerminalText text="Initialisation du système d'accès sécurisé..." delay={20} />
               <TerminalText text="Chargement du protocole d'authentification..." delay={20} />
-              <TerminalText text="ACCÈS TERMINAL FORCES ARMÉES" delay={20} className="text-military-orange" />
-              <TerminalText text="[Archives Militaires - ARMÉE DE TERRE]" delay={20} className="text-military-red font-bold" />
+              <TerminalText text="ACCÈS TERMINAL F:SCP" delay={20} className="text-military-orange" />
+              <TerminalText text="[Archives F:SCP - HIGH COMMAND AUTORITY]" delay={20} className="text-military-red font-bold" />
               <TerminalText text="ATTENTION: Accès restreint au personnel autorisé." delay={20} className="text-yellow-500" />
               <TerminalText text="Authentification requise..." delay={20} />
             </div>
