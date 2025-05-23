@@ -45,7 +45,7 @@ const Dashboard = () => {
       
       toast({
         title: "Connexion établie",
-        description: "Bienvenue dans la base de données militaire.",
+        description: "Bienvenue dans la base de données de l'AHC.",
         duration: 3000,
       });
     }, 2000);
