@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Shield, Key, User } from "lucide-react";
+import { Shield, Key, User, Lock } from "lucide-react";
 import useSound from "@/hooks/useSound";
 import TerminalText from "./TerminalText";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -63,17 +63,18 @@ const LoginScreen = ({ onLogin, attempts }: LoginScreenProps) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-military-dark text-green-500">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-military-darkblue to-military-dark">
+      <div className="noise"></div>
       <div className="w-full max-w-md relative">
         {showTerminal && (
-          <div className="mb-8 military-frame">
-            <div className="flex items-center justify-between mb-4">
+          <div className="mb-8 military-frame animate-fade-in rounded-xl overflow-hidden">
+            <div className="flex items-center justify-between mb-4 px-2">
               <Shield className="text-military-khaki" />
-              <span className="text-xs text-military-lightgray">TERMINAL SÉCURISÉ :: DÉFENSE NATIONALE</span>
-              <div className="h-2 w-2 rounded-full bg-military-red animate-pulse"></div>
+              <span className="text-xs text-military-lightgray bg-military-dark/50 px-3 py-1 rounded-full">TERMINAL SÉCURISÉ :: DÉFENSE NATIONALE</span>
+              <div className="h-3 w-3 rounded-full bg-military-red animate-pulse"></div>
             </div>
             
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-center mb-6">
               <div className="w-40 h-auto">
                 <AspectRatio ratio={1/1}>
                   <img 
@@ -86,64 +87,78 @@ const LoginScreen = ({ onLogin, attempts }: LoginScreenProps) => {
               </div>
             </div>
             
-            <TerminalText text="Initialisation du système d'accès sécurisé..." delay={20} />
-            <TerminalText text="Chargement du protocole d'authentification..." delay={20} />
-            <TerminalText text="ACCÈS TERMINAL FORCES ARMÉES" delay={20} className="text-military-orange" />
-            <TerminalText text="[Archives Militaires - ARMÉE DE TERRE]" delay={20} className="text-military-red font-bold" />
-            <TerminalText text="ATTENTION: Accès restreint au personnel autorisé." delay={20} className="text-yellow-500" />
-            <TerminalText text="Authentification requise..." delay={20} />
+            <div className="bg-military-dark/30 p-3 rounded-lg mb-3">
+              <TerminalText text="Initialisation du système d'accès sécurisé..." delay={20} />
+              <TerminalText text="Chargement du protocole d'authentification..." delay={20} />
+              <TerminalText text="ACCÈS TERMINAL FORCES ARMÉES" delay={20} className="text-military-orange" />
+              <TerminalText text="[Archives Militaires - ARMÉE DE TERRE]" delay={20} className="text-military-red font-bold" />
+              <TerminalText text="ATTENTION: Accès restreint au personnel autorisé." delay={20} className="text-yellow-500" />
+              <TerminalText text="Authentification requise..." delay={20} />
+            </div>
           </div>
         )}
         
         {showLoginForm && (
-          <form onSubmit={handleSubmit} className="military-frame">
+          <form onSubmit={handleSubmit} className="military-frame animate-fade-in rounded-xl overflow-hidden">
             <div className="flex justify-center mb-6">
-              <h2 className="military-header text-xl">IDENTIFICATION DE L'OPÉRATEUR</h2>
+              <div className="bg-military-dark/50 px-8 py-2 rounded-full border border-military-gold/50">
+                <h2 className="military-header text-xl">IDENTIFICATION DE L'OPÉRATEUR</h2>
+              </div>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-5 px-2">
               <div className="relative">
-                <User className="absolute left-3 top-3 text-military-khaki h-4 w-4" />
+                <div className="absolute left-3 top-3 flex items-center justify-center w-6 h-6 rounded-full bg-military-dark border border-military-khaki">
+                  <User className="text-military-khaki h-4 w-4" />
+                </div>
                 <Input
                   ref={usernameRef}
                   type="text"
                   placeholder="Identifiant"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="pl-10 bg-military-dark/80 border-military-green text-military-khaki"
+                  className="pl-12 h-12 military-input"
                   onKeyDown={handleKeyPress}
                 />
               </div>
               
               <div className="relative">
-                <Key className="absolute left-3 top-3 text-military-khaki h-4 w-4" />
+                <div className="absolute left-3 top-3 flex items-center justify-center w-6 h-6 rounded-full bg-military-dark border border-military-khaki">
+                  <Lock className="text-military-khaki h-4 w-4" />
+                </div>
                 <Input
                   type="password"
                   placeholder="Mot de passe"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 bg-military-dark/80 border-military-green text-military-khaki"
+                  className="pl-12 h-12 military-input"
                   onKeyDown={handleKeyPress}
                 />
               </div>
               
               {error && (
-                <div className="text-military-red text-sm font-military animate-pulse">
-                  {error}
+                <div className="text-military-red text-sm font-military bg-military-dark/50 p-3 rounded-lg border border-military-red/50 animate-pulse">
+                  <div className="flex items-center">
+                    <Shield className="w-4 h-4 mr-2" />
+                    {error}
+                  </div>
                 </div>
               )}
               
               <Button
                 type="submit"
-                className="w-full bg-military-green hover:bg-military-khaki text-white"
+                className="w-full h-12 bg-military-green hover:bg-military-khaki text-white rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg"
               >
-                ACCÉDER AU SYSTÈME
+                <Key className="w-4 h-4" />
+                <span>ACCÉDER AU SYSTÈME</span>
               </Button>
             </div>
             
-            <div className="mt-6 text-xs text-military-lightgray border-t border-military-green pt-4">
-              <p>AVERTISSEMENT: Toutes les connexions sont contrôlées et enregistrées.</p>
-              <p>Usage non autorisé passible de poursuites.</p>
+            <div className="mt-6 text-xs text-military-lightgray border-t border-military-green pt-4 px-3">
+              <div className="bg-military-dark/30 p-3 rounded-lg">
+                <p className="mb-1">AVERTISSEMENT: Toutes les connexions sont contrôlées et enregistrées.</p>
+                <p>Usage non autorisé passible de poursuites.</p>
+              </div>
             </div>
           </form>
         )}

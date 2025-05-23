@@ -132,19 +132,24 @@ export default {
 					'0%': { transform: 'translateX(-100%)' },
 					'100%': { transform: 'translateX(100%)' }
 				},
+				'glow-pulse': {
+					'0%, 100%': { boxShadow: '0 0 5px rgba(212, 175, 55, 0.3)' },
+					'50%': { boxShadow: '0 0 15px rgba(212, 175, 55, 0.7)' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'text-flicker': 'text-flicker 0.5s infinite',
 				'pulse-red': 'pulse-red 1s infinite',
-				'rotate-logo': 'rotate-logo 4s linear infinite',
+				'rotate-logo': 'rotate-logo 20s linear infinite',
 				'fade-in': 'fade-in 0.5s ease-in forwards',
 				'typing': 'typing 3.5s steps(40, end)',
 				'blink': 'blink 1s step-end infinite',
 				'security-banner': 'security-banner 30s linear infinite',
 				'progress-bar': 'progress-bar 5s linear',
 				'progress-line': 'progress-line 1s infinite',
+				'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
 			}
 		}
 	},
@@ -153,10 +158,13 @@ export default {
 		function({ addBase }) {
 			addBase({
 				'.military-frame': {
-					'@apply bg-military-darkblue/80 border border-military-gold/70 p-4 rounded-sm': {},
+					'@apply bg-military-darkblue/80 border border-military-gold/70 p-4 rounded-lg': {},
+					'box-shadow': '0 0 15px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(212, 175, 55, 0.1)',
+					'backdrop-filter': 'blur(5px)',
 				},
 				'.military-header': {
 					'@apply font-military uppercase tracking-wider text-military-gold': {},
+					'text-shadow': '0 0 8px rgba(212, 175, 55, 0.3)',
 				},
 				'.font-military': {
 					'text-rendering': 'optimizeLegibility',
@@ -194,9 +202,36 @@ export default {
 					'width': '100%',
 					'height': '100%',
 					'background-image': 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAPklEQVRoge3NQQEAMAzDsB7LxP85rcT5rAFqZm7u9pnBFuOTEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQkFXkAdohCDFwEMvlAAAAAElFTkSuQmCC")',
-					'opacity': '0.05',
+					'opacity': '0.04',
 					'z-index': '20',
 					'pointer-events': 'none',
+				},
+				'.military-button': {
+					'@apply bg-military-darkblue border border-military-gold/70 text-military-gold py-2 px-4 rounded-md': {},
+					'transition': 'all 0.2s ease',
+					'box-shadow': '0 0 5px rgba(212, 175, 55, 0.2), inset 0 0 5px rgba(212, 175, 55, 0.1)',
+				},
+				'.military-button:hover': {
+					'@apply border-military-gold bg-military-darkblue/90': {},
+					'box-shadow': '0 0 10px rgba(212, 175, 55, 0.4), inset 0 0 8px rgba(212, 175, 55, 0.2)',
+				},
+				'.military-input': {
+					'@apply bg-military-dark/80 border border-military-green/70 text-military-khaki rounded-md py-2 px-3': {},
+					'transition': 'all 0.2s ease',
+				},
+				'.military-input:focus': {
+					'@apply border-military-gold/70 outline-none': {},
+					'box-shadow': '0 0 5px rgba(212, 175, 55, 0.3)',
+				},
+				'.military-card': {
+					'@apply bg-military-darkblue/80 border border-military-gold/40 rounded-lg': {},
+					'backdrop-filter': 'blur(3px)',
+					'transition': 'all 0.3s ease',
+					'box-shadow': '0 4px 12px rgba(0, 0, 0, 0.2)',
+				},
+				'.military-card:hover': {
+					'@apply border-military-gold/70': {},
+					'box-shadow': '0 6px 16px rgba(0, 0, 0, 0.3), 0 0 10px rgba(212, 175, 55, 0.1)',
 				}
 			});
 		}
