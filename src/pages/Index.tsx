@@ -12,6 +12,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loginAttempts, setLoginAttempts] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
+  const [showAssignments, setShowAssignments] = useState(false);
   const navigate = useNavigate();
   const { playSound } = useSound();
 
@@ -21,6 +22,7 @@ const Index = () => {
     setIsLoading(false);
     setLoginAttempts(0);
     setShowAlert(false);
+    setShowAssignments(false);
   }, []);
 
   const handleLogin = (username: string, password: string): boolean => {
@@ -42,7 +44,12 @@ const Index = () => {
   };
 
   const handleLoadingComplete = () => {
-    navigate("/dashboard");
+    // Uncomment to navigate directly to dashboard
+    // navigate("/dashboard");
+    
+    // Show assignments on home instead of redirecting
+    setIsLoading(false);
+    setShowAssignments(true);
   };
 
   return (
@@ -55,9 +62,11 @@ const Index = () => {
         <LoadingScreen onComplete={handleLoadingComplete} />
       ) : (
         <div className="container mx-auto px-4 py-8">
-          <LoginScreen onLogin={handleLogin} attempts={loginAttempts} />
+          {!isLoggedIn && (
+            <LoginScreen onLogin={handleLogin} attempts={loginAttempts} />
+          )}
           
-          {isLoggedIn && (
+          {(isLoggedIn && showAssignments) && (
             <HomeAssignmentsSection />
           )}
         </div>

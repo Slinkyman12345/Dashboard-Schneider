@@ -2,9 +2,14 @@
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { AlertTriangle, Lock } from "lucide-react";
+import useSound from "@/hooks/useSound";
 
 const AssignmentsSection = () => {
   const [timelineTab, setTimelineTab] = useState("all");
+  const [isLatestAssignmentClassified, setIsLatestAssignmentClassified] = useState(true);
+  const { playSound } = useSound();
   
   const assignments = [
     {
@@ -66,6 +71,11 @@ const AssignmentsSection = () => {
         return false;
       });
 
+  const handleRevealClassified = () => {
+    playSound("terminal-beep");
+    setIsLatestAssignmentClassified(false);
+  };
+
   return (
     <div className="space-y-6">
       <div className="military-frame">
@@ -95,29 +105,105 @@ const AssignmentsSection = () => {
             <div key={index} className="mb-10 relative">
               <div className="absolute -left-10 w-5 h-5 rounded-full bg-military-green border-2 border-military-khaki"></div>
               
-              <div className="military-frame">
-                <div className="flex flex-wrap justify-between items-start mb-2">
-                  <h3 className="text-lg font-military text-military-orange">{assignment.period}</h3>
-                  <span className="text-sm bg-military-dark/60 px-2 py-1 rounded">Grade: {assignment.grade}</span>
-                </div>
-                
-                <div className="mb-3">
-                  <p className="text-base font-bold">{assignment.role}</p>
-                  <p className="text-sm text-military-lightgray">{assignment.location}</p>
-                </div>
-                
-                <div className="space-y-3 text-sm">
-                  <div>
-                    <p className="text-xs text-military-lightgray mb-1">DÉTAILS DE L'AFFECTATION</p>
-                    <p>{assignment.details}</p>
+              {assignment.period === "2020-présent" && isLatestAssignmentClassified ? (
+                <motion.div 
+                  className="military-frame bg-military-dark border-red-900/70"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="absolute top-0 right-0 bg-red-900/70 text-xs text-white px-2 py-1 rounded-bl">
+                    <div className="flex items-center">
+                      <AlertTriangle size={12} className="mr-1" />
+                      TRÈS SECRET DÉFENSE
+                    </div>
                   </div>
                   
-                  <div>
-                    <p className="text-xs text-military-lightgray mb-1">NOTES</p>
-                    <p>{assignment.notes}</p>
+                  <div className="relative overflow-hidden py-6">
+                    {/* Effet de scanlines */}
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
+                      {Array(20).fill(0).map((_, i) => (
+                        <div 
+                          key={i} 
+                          className="h-px bg-red-500 w-full absolute" 
+                          style={{ top: `${i * 5}%`, left: 0, opacity: 0.7 }} 
+                        />
+                      ))}
+                    </div>
+                    
+                    <div className="flex flex-wrap justify-between items-start mb-4">
+                      <h3 className="text-lg font-military text-red-500">{assignment.period}</h3>
+                      <span className="text-sm bg-military-dark/60 px-2 py-1 rounded text-red-400">Grade: {assignment.grade}</span>
+                    </div>
+                    
+                    <div className="mb-4">
+                      <p className="text-base font-bold text-military-lightgold">{assignment.role}</p>
+                      <p className="text-sm text-military-lightgray">{assignment.location}</p>
+                    </div>
+
+                    <div className="p-6 flex flex-col items-center justify-center">
+                      <div className="border-2 border-red-900/70 rounded-full p-4 bg-military-dark/50 mb-4">
+                        <Lock size={32} className="text-red-500" />
+                      </div>
+                      <h3 className="text-lg mb-2 text-red-500 font-military">ACCÈS RESTREINT</h3>
+                      <p className="text-sm text-center max-w-md mb-6 text-military-lightgold">
+                        Cette affectation contient des informations classifiées de niveau supérieur.
+                        Niveau d'habilitation requis: TRÈS SECRET DÉFENSE.
+                      </p>
+                      <button 
+                        onClick={handleRevealClassified}
+                        className="bg-red-900/30 text-red-400 border border-red-900/50 px-4 py-2 hover:bg-red-900/50 transition-all duration-300 rounded"
+                      >
+                        Demander accès
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                <div className="military-frame">
+                  <div className="flex flex-wrap justify-between items-start mb-2">
+                    <h3 className="text-lg font-military text-military-orange">{assignment.period}</h3>
+                    <span className="text-sm bg-military-dark/60 px-2 py-1 rounded">Grade: {assignment.grade}</span>
+                  </div>
+                  
+                  <div className="mb-3">
+                    <p className="text-base font-bold">{assignment.role}</p>
+                    <p className="text-sm text-military-lightgray">{assignment.location}</p>
+                  </div>
+                  
+                  <div className="space-y-3 text-sm">
+                    <div>
+                      <p className="text-xs text-military-lightgray mb-1">DÉTAILS DE L'AFFECTATION</p>
+                      <p>{assignment.details}</p>
+                    </div>
+                    
+                    <div>
+                      <p className="text-xs text-military-lightgray mb-1">NOTES</p>
+                      <p>{assignment.notes}</p>
+                    </div>
+
+                    {assignment.period === "2020-présent" && !isLatestAssignmentClassified && (
+                      <div className="mt-4 border-t border-military-green/30 pt-4">
+                        <div className="flex items-center text-xs text-red-400 mb-2">
+                          <AlertTriangle size={12} className="mr-1" />
+                          <span>INFORMATIONS CLASSIFIÉES - ACCÈS LIMITÉ</span>
+                        </div>
+                        <div className="space-y-2 relative">
+                          <p className="text-sm">
+                            Mission actuelle: <span className="bg-red-900/30 px-2 py-0.5">████████████</span> en liaison avec <span className="bg-red-900/30 px-2 py-0.5">██████</span>
+                          </p>
+                          <p className="text-sm">
+                            Opération en cours: <span className="bg-red-900/30 px-2 py-0.5">██████████████</span>
+                          </p>
+                          <p className="text-sm">
+                            Statut: <span className="text-red-500">ACTIF</span>
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           ))}
         </div>
