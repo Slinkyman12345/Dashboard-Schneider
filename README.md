@@ -1,2 +1,2 @@
-Libre d'utilisation !
-Love all
+Source original = https://github.com/Schriekeee/Dashboard-Schneider 
+Merci pour le code ! 
