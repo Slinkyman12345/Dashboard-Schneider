@@ -88,7 +88,6 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
           <Progress 
             value={progress} 
             className="h-3 bg-military-dark rounded-full overflow-hidden" 
-            indicatorClassName="bg-gradient-to-r from-military-gold to-military-orange"
           />
         </div>
         

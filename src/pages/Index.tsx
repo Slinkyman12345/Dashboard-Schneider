@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import LoginScreen from "@/components/LoginScreen";
 import LoadingScreen from "@/components/LoadingScreen";
 import AlertScreen from "@/components/AlertScreen";
+import HomeAssignmentsSection from "@/components/HomeAssignmentsSection";
 import useSound from "@/hooks/useSound";
 
 const Index = () => {
@@ -53,7 +54,13 @@ const Index = () => {
       ) : isLoading ? (
         <LoadingScreen onComplete={handleLoadingComplete} />
       ) : (
-        <LoginScreen onLogin={handleLogin} attempts={loginAttempts} />
+        <div className="container mx-auto px-4 py-8">
+          <LoginScreen onLogin={handleLogin} attempts={loginAttempts} />
+          
+          {isLoggedIn && (
+            <HomeAssignmentsSection />
+          )}
+        </div>
       )}
     </div>
   );
