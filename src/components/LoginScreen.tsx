@@ -78,8 +78,8 @@ const LoginScreen = ({ onLogin, attempts }: LoginScreenProps) => {
               <div className="w-40 h-auto">
                 <AspectRatio ratio={1/1}>
                   <img 
-                    src="/lovable-uploads/397fe1f0-2d27-44fd-86fe-28db388851b8.png" 
-                    alt="Logo DRHAT - Direction des Ressources Humaines de l'Armée de Terre" 
+                    src="/lovable-uploads/zz49.png" 
+                    alt="Logo AHC" 
                     className="w-full h-full object-contain animate-spin-slow"
                   />
                 </AspectRatio>
@@ -90,9 +90,9 @@ const LoginScreen = ({ onLogin, attempts }: LoginScreenProps) => {
             <div className="bg-military-dark/30 p-3 rounded-lg mb-3">
               <TerminalText text="Initialisation du système d'accès sécurisé..." delay={20} />
               <TerminalText text="Chargement du protocole d'authentification..." delay={20} />
-              <TerminalText text="ACCÈS TERMINAL F:SCP" delay={20} className="text-military-orange" />
-              <TerminalText text="[Archives F:SCP - HIGH COMMAND AUTORITY]" delay={20} className="text-military-red font-bold" />
-              <TerminalText text="ATTENTION: Accès restreint au personnel autorisé." delay={20} className="text-yellow-500" />
+              <TerminalText text="ACCÈS TERMINAL F:SCP" delay={30} className="text-military-orange" />
+              <TerminalText text="[Archives F:SCP - HIGH COMMAND AUTORITY]" delay={30} className="text-military-red font-bold" />
+              <TerminalText text="ATTENTION: Accès restreint au personnel autorisé." delay={30} className="text-yellow-500" />
               <TerminalText text="Authentification requise..." delay={20} />
             </div>
           </div>
@@ -157,7 +157,7 @@ const LoginScreen = ({ onLogin, attempts }: LoginScreenProps) => {
             <div className="mt-6 text-xs text-military-lightgray border-t border-military-green pt-4 px-3">
               <div className="bg-military-dark/30 p-3 rounded-lg">
                 <p className="mb-1">AVERTISSEMENT: Toutes les connexions sont contrôlées et enregistrées.</p>
-                <p>Usage non autorisé passible de poursuites.</p>
+                <p>Usage non autorisé passible de poursuites pour haute trahison.</p>
               </div>
             </div>
           </form>

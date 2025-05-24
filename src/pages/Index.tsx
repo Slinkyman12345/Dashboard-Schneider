@@ -23,7 +23,7 @@ const Index = () => {
   }, []);
 
   const handleLogin = (username: string, password: string): boolean => {
-    if (username === "admin" && password === "admin") {
+    if (username === "supervisor.ahc.site04@scip.net" && password === "z2ZmuYX8JWBkvzvB3LdG") {
       playSound("access-granted");
       setIsLoggedIn(true);
       setIsLoading(true);
