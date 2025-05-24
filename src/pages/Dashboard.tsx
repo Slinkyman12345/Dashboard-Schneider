@@ -116,7 +116,7 @@ const Dashboard = () => {
       <div className={`w-64 border-r border-military-gold bg-military-darkblue/95 transition-all duration-700 ${animationComplete ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'}`}>
         <div className="p-4 border-b border-military-gold bg-military-darkblue/95 text-center mb-4">
           <div className="text-military-gold font-military tracking-wider">SYSTÈME D'ARCHIVES</div>
-          <div className="text-xs text-military-lightgold">Terminal MILNET-7745</div>
+          <div className="text-xs text-military-lightgold">Terminal AHC-3691</div>
         </div>
         <SidebarMenu activeTab={activeTab} onTabChange={handleTabChange} />
         
@@ -135,18 +135,18 @@ const Dashboard = () => {
           <div>
             <h1 className="military-header text-2xl mb-1 flex items-center text-military-gold">
               <span className="block w-2 h-6 bg-military-gold mr-2 animate-pulse"></span>
-              ARCHIVES MILITAIRES
+              ARCHIVES F:SCP
               <span className="block w-2 h-6 bg-military-gold ml-2 animate-pulse"></span>
             </h1>
             <p className="text-sm text-military-lightgold border-b border-military-gold/50 pb-2">
-              Personnel :: Schneider, Alexander :: Dossier #A7742-SC
+              Archive :: Projet Sentinel :: Dossier #AHC5331-FSCP
             </p>
           </div>
           
           <div className="bg-military-darkblue/90 p-3 rounded border border-military-gold text-xs backdrop-blur-sm">
             <div className="flex items-center justify-between mb-1">
               <span className="text-military-lightgold">NIVEAU D'ACCÈS:</span>
-              <span className="text-military-gold">BRAVO-DELTA</span>
+              <span className="text-military-gold">NIVEAU 4</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-military-lightgold">SESSION:</span>
